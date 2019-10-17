@@ -4,7 +4,9 @@ const databaseUrl = process.env.DATABASE_URL || 'postgres://postgres:test@localh
 const db = new Sequelize(databaseUrl)
 
 db
-    .sync()
+    .sync({
+        force: false
+    })
     .then(() => console.log('Database schema updated'))
     .catch(console.error)
 
