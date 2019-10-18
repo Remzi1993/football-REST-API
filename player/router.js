@@ -25,9 +25,11 @@ router.get('/players', (req, res, next) => {
 });
 
 router.get('/players/:playerId', (req, res, next) => {
-    Player.findByPk(req.params.playerId, { include: [Team] })
+    Player.findByPk(req.params.playerId, {
+            include: [Team]
+        })
         .then(player => {
-            res.send(player);
+            res.json(player);
         })
         .catch(next);
 });
@@ -66,6 +68,7 @@ router.put("/players/:playerId", (req, res, next) => {
 // Delete a Player
 router.delete("/players/:playerId", (req, res, next) => {
     console.log(req.params);
+    // console.log('params', req.params)
     // res.send('The route works!')
 
     Player.destroy({
@@ -82,6 +85,5 @@ router.delete("/players/:playerId", (req, res, next) => {
         })
         .catch(next);
 });
-
 
 module.exports = router;

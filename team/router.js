@@ -25,9 +25,11 @@ router.get('/teams', (req, res, next) => {
 });
 
 router.get('/teams/:teamId', (req, res, next) => {
-    Team.findByPk(req.params.teamId, { include: [Player] })
+    Team.findByPk(req.params.teamId, {
+            include: [Player]
+        })
         .then(team => {
-            res.send(team);
+            res.json(team);
         })
         .catch(next);
 });
@@ -37,6 +39,7 @@ router.get('/teams/:teamId', (req, res, next) => {
 router.patch("/teams/:teamId", (req, res, next) => {
     Team.findByPk(req.params.teamId)
         .then(team => {
+            // console.log("team > ", team)
             if (team) {
                 team
                     .update(req.body)
@@ -82,6 +85,5 @@ router.delete("/teams/:teamId", (req, res, next) => {
         })
         .catch(next);
 });
-
 
 module.exports = router;
